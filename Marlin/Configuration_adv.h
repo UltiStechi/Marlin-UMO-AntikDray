@@ -310,7 +310,8 @@
 #define CHDK_DELAY 50 //How long in ms the pin should stay HIGH before going LOW again
 
 #define SD_FINISHED_STEPPERRELEASE true  //if sd support and the file is finished: disable steppers?
-#define SD_FINISHED_MOVEEXTRUDERAWAY "G28 X0 Y0 F5000" //Move extruder away before disabling steppers
+#define SD_FINISHED_MOVEEXTRUDERAWAY0 "G01 X10 Y10 F5000" //Move extruder away before disabling steppers - if Z is more than 10mm
+#define SD_FINISHED_MOVEEXTRUDERAWAY1 "G01 X10 Y10 Z10 F5000" //Move extruder away before disabling steppers - if Z is below 10mm
 #define SD_FINISHED_RELEASECOMMAND "M84 X Y Z E" // You might want to keep the z enabled so your bed stays in place.
 
 #define SDCARD_RATHERRECENTFIRST  //reverse file order of sd card menu display. Its sorted practically after the file system block order.
