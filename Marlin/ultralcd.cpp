@@ -286,9 +286,11 @@ static void lcd_sdcard_stop()
     card.closefile();
     quickStop();
     if(SD_FINISHED_STEPPERRELEASE)
-    {
+    {	
+		enquecommand_P(PSTR(SD_FINISHED_MOVEEXTRUDERAWAY));
         enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
     }
+	disable_heater();
     autotempShutdown();
 }
 
