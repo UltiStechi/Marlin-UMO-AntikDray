@@ -167,6 +167,7 @@
 	#define MSG_PAUSE_PRINT "Pause print"
 	#define MSG_RESUME_PRINT "Resume print"
 	#define MSG_STOP_PRINT "Stop print"
+	#define MSG_STOP_PRINT_COOL "Stop and cool down"
 	#define MSG_CARD_MENU "Print from SD"
 	#define MSG_NO_CARD "No SD card"
 	#define MSG_DWELL "Sleep..."

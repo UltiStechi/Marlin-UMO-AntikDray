@@ -280,6 +280,33 @@ static void lcd_sdcard_resume()
     card.startFileprint();
 }
 
+static void lcd_sdcard_stop_and_cool()
+{
+    card.sdprinting = false;
+    card.closefile();
+    quickStop();
+   if(SD_FINISHED_STEPPERRELEASE)
+      {	
+		#ifdef UMO_BOTTOM_Z_STOP_MOD
+		  	enquecommand_P(PSTR("G28"));
+ 			enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+		#else
+  		if (current_position[Z_AXIS] < Z_MAX_POS - 191)
+ 		{
+  			enquecommand_P(PSTR(SD_FINISHED_MOVEEXTRUDERAWAY1));
+ 			enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+ 		}
+  		else
+ 		{
+  			enquecommand_P(PSTR(SD_FINISHED_MOVEEXTRUDERAWAY0));
+  			enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+		}
+		#endif
+      }
+	  disable_heater();
+      autotempShutdown();
+}
+
 static void lcd_sdcard_stop()
 {
     card.sdprinting = false;
@@ -332,6 +359,7 @@ static void lcd_main_menu()
                 MENU_ITEM(function, MSG_RESUME_PRINT, lcd_sdcard_resume);
 				#endif
             MENU_ITEM(function, MSG_STOP_PRINT, lcd_sdcard_stop);
+            MENU_ITEM(function, MSG_STOP_PRINT_COOL, lcd_sdcard_stop_and_cool);
         }else{
             MENU_ITEM(submenu, MSG_CARD_MENU, lcd_sdcard_menu);
 #if SDCARDDETECT < 1
