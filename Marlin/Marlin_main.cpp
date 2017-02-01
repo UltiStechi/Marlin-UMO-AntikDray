@@ -2904,6 +2904,7 @@ void process_commands()
           lcd_update();
           if(cnt==0)
           {
+		#ifdef BEEP_DURING_FILAMENT_CHANGE
           #if BEEPER > 0
             SET_OUTPUT(BEEPER);
 
@@ -2918,6 +2919,7 @@ void process_commands()
 			  lcd_buzz(LCD_FEEDBACK_FREQUENCY_DURATION_MS,LCD_FEEDBACK_FREQUENCY_HZ);
 			#endif
           #endif
+		  #endif
           }
         }
 

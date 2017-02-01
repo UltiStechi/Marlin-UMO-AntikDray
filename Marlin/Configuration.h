@@ -417,6 +417,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define Y_MAX_LENGTH (Y_MAX_POS - Y_MIN_POS)
 #define Z_MAX_LENGTH (Z_MAX_POS - Z_MIN_POS)
 
+
+//#define BEEP_DURING_FILAMENT_CHANGE //Uncomment to enable an annoying beeper during the filament change command
+
 //===========================================================================
 //========================= Filament Runout Sensor ==========================
 //===========================================================================

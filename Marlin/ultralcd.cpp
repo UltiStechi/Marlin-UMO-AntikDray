@@ -286,7 +286,11 @@ static void lcd_sdcard_stop()
     card.closefile();
     quickStop();
    if(SD_FINISHED_STEPPERRELEASE)
-      {
+      {	
+		#ifdef UMO_BOTTOM_Z_STOP_MOD
+		  	enquecommand_P(PSTR("G28"));
+ 			enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+		#else
   		if (current_position[Z_AXIS] < Z_MAX_POS - 191)
  		{
   			enquecommand_P(PSTR(SD_FINISHED_MOVEEXTRUDERAWAY1));
@@ -297,8 +301,8 @@ static void lcd_sdcard_stop()
   			enquecommand_P(PSTR(SD_FINISHED_MOVEEXTRUDERAWAY0));
   			enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
 		}
+		#endif
       }
-  		disable_heater();
       autotempShutdown();
 }
 
